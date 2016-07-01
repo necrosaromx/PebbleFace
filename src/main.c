@@ -14,12 +14,12 @@ static void update_time() {
   // Get a tm structure
   time_t temp = time(NULL); 
   struct tm *tick_time = localtime(&temp);
-  static char s_buffer_date[12];
+  static char s_buffer_date[20];
   // Write the current hours and minutes into a buffer
   static char s_buffer[8];
   strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
                                           "%H:%M" : "%I:%M", tick_time);
-  strftime(s_buffer_date, sizeof(s_buffer_date), "%b %e!", tick_time);
+  strftime(s_buffer_date, sizeof(s_buffer_date), "%A!%e %B", tick_time);
 
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, s_buffer);
@@ -46,8 +46,9 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
 
       // Create SLIME
+  GRect slime_bounds = gbitmap_get_bounds(s_slime_bitmap);
   s_slime_bitmap = gbitmap_create_with_resource(RESOURCE_ID_SLIME);
-  s_slime_layer = bitmap_layer_create(GRect(73, 120, 33, 33));
+  s_slime_layer = bitmap_layer_create(GRect((bounds.size.w / 2) - ((slime_bounds.size.w / 2)), 120, 33, 33));
   bitmap_layer_set_bitmap(s_slime_layer, s_slime_bitmap);
   layer_add_child(window_layer, bitmap_layer_get_layer(s_slime_layer));  
 
@@ -55,7 +56,7 @@ static void main_window_load(Window *window) {
   s_time_layer = text_layer_create(
       GRect(3, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w, 50));
   s_date_layer = text_layer_create(
-      GRect(0, 0, bounds.size.w, bounds.size.h));
+      GRect(0, -35, bounds.size.w, bounds.size.h));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_time_layer, GColorClear);
