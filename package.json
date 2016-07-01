@@ -14,17 +14,29 @@
         "resources": {
             "media": [
                 {
-                    "file": "images/background.png",
-                    "name": "BACKGROUND",
+                    "file": "images/blackslebble.png",
+                    "name": "SLIME",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
-                    "file": "fonts/dw1-font.ttf",
-                    "name": "DW_FONT_24",
+                    "file": "images/dw-background.png",
+                    "name": "DW_BG",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "fonts/alt-dw.ttf",
+                    "name": "DW_FONT_48",
                     "targetPlatforms": null,
                     "trackingAdjust": 1,
                     "type": "font"
+                },
+                {
+                    "file": "images/background.png",
+                    "name": "BACKGROUND",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
                 },
                 {
                     "file": "fonts/perfect-dos-vga.tiff",
