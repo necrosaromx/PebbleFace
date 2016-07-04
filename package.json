@@ -40,7 +40,7 @@
                 },
                 {
                     "file": "fonts/perfect-dos-vga.tiff",
-                    "name": "PERFECT_DOS_48",
+                    "name": "PERFECT_DOS_36",
                     "targetPlatforms": null,
                     "type": "font"
                 }
