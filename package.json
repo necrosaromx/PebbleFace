@@ -4,15 +4,18 @@
     "keywords": [],
     "name": "tutorial-1-3",
     "pebble": {
-        "capabilities": [
-            ""
-        ],
         "displayName": "Tutorial-1-3",
         "enableMultiJS": false,
-        "messageKeys": {},
+        "messageKeys": [],
         "projectType": "native",
         "resources": {
             "media": [
+                {
+                    "file": "data/slime.pdc",
+                    "name": "SLIME_VECTOR",
+                    "targetPlatforms": null,
+                    "type": "raw"
+                },
                 {
                     "file": "images/stat-box.png",
                     "name": "STATBOX",
@@ -53,6 +56,11 @@
             ]
         },
         "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk"
+        ],
         "uuid": "12f50305-c24e-4855-914c-a9a12f9002f0",
         "watchapp": {
             "watchface": true

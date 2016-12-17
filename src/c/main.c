@@ -3,12 +3,8 @@
 static Window *s_main_window;
 static TextLayer *s_time_layer,*s_date_layer, *s_battery_layer,*s_percent_layer;
 static GFont s_time_font,s_date_font,s_battery_font,s_percent_font;
-static BitmapLayer *s_background_layer;
-static GBitmap *s_background_bitmap;
-static BitmapLayer *s_slime_layer;
-static GBitmap *s_slime_bitmap;
-static BitmapLayer *s_stat_layer;
-static GBitmap *s_stat_bitmap;
+static BitmapLayer *s_background_layer, *s_slime_layer, *s_stat_layer;
+static GBitmap *s_background_bitmap, *s_slime_bitmap, *s_stat_bitmap;
 static int s_battery_level = 99;
 
 
@@ -16,23 +12,23 @@ static void update_time() {
   // Get a tm structure
   time_t temp = time(NULL); 
   struct tm *tick_time = localtime(&temp);
-  static char s_buffer_date[8];
+  static char s_buffer_date[8], s_buffer[8];
   // Write the current hours and minutes into a buffer
-  static char s_buffer[8];
   strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
                                           "%H:%M" : "%I:%M", tick_time);
   strftime(s_buffer_date, sizeof(s_buffer_date), "%a! %e", tick_time);
-
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, s_buffer);
   text_layer_set_text(s_date_layer, s_buffer_date);
 }
 
 static void update_batt() {
-  static char s_buffer_percent[4]; 
+  static char s_buffer_percent[4];
+  if (s_battery_level <= 30) {
   // Record the new battery level
   snprintf(s_buffer_percent, sizeof(s_buffer_percent), "H%d", s_battery_level);
   text_layer_set_text(s_percent_layer, s_buffer_percent);
+  }
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -118,7 +114,7 @@ static void main_window_load(Window *window) {
   // this is the battery percentage
   text_layer_set_background_color(s_percent_layer, GColorClear);
   text_layer_set_text_color(s_percent_layer, GColorWhite);
-  text_layer_set_text(s_percent_layer, "H00");
+  text_layer_set_text(s_percent_layer, "Max");
   // Create GFont
   s_percent_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DW_FONT_48));
 
